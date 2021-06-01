@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body class="bg-secondary container">
+
+    <div class="align-items-center container">
+        <div class="space-between align-items-center full-width">
+            <a href="./home.html">
+                <i class="fas fa-arrow-left small-icon"></i>
+            </a>
+            <h1 class="primary-text-color">Nuova segnalazione</h1>
+            <i class="fas fa-nope small-icon"></i>
+
+        </div>
+
+
+        <div>
+            <p><b>Inserisci tutte le informazioni che ritieni utili</b></p>
+            <textarea class="emergency-description" placeholder="Descrizione dell'emergenza..."></textarea>
+        </div>
+
+
+        <div class="full-width">
+            <h3>Grado di emergenza</h3>
+            <div class="space-between">
+                <div>
+                    <input type="radio" id="low" name="emergency" value="low">
+                    <label class="label-primary" for="low">Basso</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="medium" name="emergency" value="low">
+                    <label class="label-primary" for="medium">Medio</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="high" name="emergency" value="low">
+                    <label class="label-primary" for="high">Alto</label>
+                </div>
+
+            </div>
+
+            <label class="container-input mt-30">Voglio raccogliere un campione
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+
+            <a href="tel: +39 31234567890">
+           z     <div class="mt-30">
+                    <button class="outlined-button">
+                        <i class="fas fa-camera medium-icon" style="margin-right:10px"></i>
+                        <span>AGGIUNGI FOTO</span>
+                    </button>
+                </div>
+            </a>
+        </div>
+
+
+
+
+        <a href="#" class="mt-30">
+            <div class="m10">
+                <button class="full-width-primary-button primary-size">Invia segnalazione</button>
+            </div>
+        </a>
+
+        <div class="modal" style="display: none;">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <div class="modal-body align-items-center">
+
+                    <i class="fas fa-check big-icon"></i>
+
+
+                    <h3 class="primary-text-color" style="margin-bottom: 5px;">
+                        Segnalazione completata
+                    </h3>
+                    <span class="primary-text-color">
+                        Verrai ricontattato nelle prossime ore
+                    </span>
+z
+                    <a href="../home.html" class="mt-30">
+                        <div class="m10">
+                            <button class="full-width-primary-button primary-size">vai alla home</button>
+                        </div>
+                    </a>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
