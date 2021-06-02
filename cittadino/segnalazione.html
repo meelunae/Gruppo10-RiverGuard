@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -10,6 +10,8 @@
 </head>
 
 <body class="bg-secondary container">
+
+
 
     <div class="align-items-center container">
         <div class="space-between align-items-center full-width">
@@ -22,9 +24,12 @@
         </div>
 
 
-        <div>
-            <p><b>Inserisci tutte le informazioni che ritieni utili</b></p>
-            <textarea class="emergency-description" placeholder="Descrizione dell'emergenza..."></textarea>
+        <div style="width:100%">
+            <p class="small-text-description">
+                Inserisci tutte le informazioni che ritieni utili
+            </p>
+            <textarea class="emergency-description" placeholder="Descrizione dell'emergenza..."
+                id="description"></textarea>
         </div>
 
 
@@ -54,11 +59,18 @@
             </label>
 
             <a href="tel: +39 31234567890">
-           z     <div class="mt-30">
-                    <button class="outlined-button">
-                        <i class="fas fa-camera medium-icon" style="margin-right:10px"></i>
-                        <span>AGGIUNGI FOTO</span>
+                <div class="mt-30">
+
+                    <button class="outlined-button row">
+
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fas fa-camera medium-icon" style="margin-right:10px"></i>
+                            <span>AGGIUNGI FOTO</span>
+                        </label>
+                        <input id="file-upload" type="file" style="width:0px" />
+
                     </button>
+
                 </div>
             </a>
         </div>
@@ -86,22 +98,22 @@
                     <span class="primary-text-color">
                         Verrai ricontattato nelle prossime ore
                     </span>
-z
-                    <a href="../home.html" class="mt-30">
-                        <div class="m10">
-                            <button class="full-width-primary-button primary-size">vai alla home</button>
-                        </div>
-                    </a>
 
-
+                    <div class="m10">
+                        <button class="full-width-primary-button primary-size asd">vai alla home</button>
+                    </div>
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
+
+    <script>
+        $("#submit").click(() => {
+            const description = $("#description").text;
+            console.log(description);
+        });
+    </script>
 
 
 </body>
