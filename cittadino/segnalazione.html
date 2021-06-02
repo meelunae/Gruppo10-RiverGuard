@@ -42,19 +42,19 @@
                 </div>
 
                 <div>
-                    <input type="radio" id="medium" name="emergency" value="low">
+                    <input type="radio" id="medium" name="emergency" value="medium" checked>
                     <label class="label-primary" for="medium">Medio</label>
                 </div>
 
                 <div>
-                    <input type="radio" id="high" name="emergency" value="low">
+                    <input type="radio" id="high" name="emergency" value="high">
                     <label class="label-primary" for="high">Alto</label>
                 </div>
 
             </div>
 
             <label class="container-input mt-30">Voglio raccogliere un campione
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" checked="checked" name="sendKit">
                 <span class="checkmark"></span>
             </label>
 
@@ -80,11 +80,11 @@
 
         <a href="#" class="mt-30">
             <div class="m10">
-                <button class="full-width-primary-button primary-size">Invia segnalazione</button>
+                <button class="full-width-primary-button primary-size" id="send">Invia segnalazione</button>
             </div>
         </a>
 
-        <div class="modal" style="display: none;">
+        <div class="modal" id="modal" style="display: none;">
             <div class="modal-bg"></div>
             <div class="modal-content">
                 <div class="modal-body align-items-center">
@@ -99,9 +99,11 @@
                         Verrai ricontattato nelle prossime ore
                     </span>
 
-                    <div class="m10">
-                        <button class="full-width-primary-button primary-size asd">vai alla home</button>
-                    </div>
+                    <a href="home.html">
+                        <div class="m10">
+                            <button class="full-width-primary-button primary-size asd">vai alla home</button>
+                        </div>
+                    </a>
 
                 </div>
             </div>
@@ -109,10 +111,29 @@
     </div>
 
     <script>
-        $("#submit").click(() => {
-            const description = $("#description").text;
-            console.log(description);
+
+        const saveReport = obj => {
+            const reports = JSON.parse(localStorage.getItem("reports")) || []
+            const tmpReports = [...reports, obj]
+            localStorage.setItem("reports", JSON.stringify(tmpReports))
+            console.log("Reports updated => ", localStorage.getItem("reports"))
+        }
+
+        $("#send").click(() => {
+            const description = $("#description").val();
+            const radioValue = $("input[name='emergency']:checked").val();
+            const kit = $("input[name='sendKit']:checked").val();
+
+            const obj = {
+                description,
+                emergencyType: radioValue,
+                sendKit: !!kit
+            }
+            saveReport(obj)
+
+            $("#modal").css("display", "flex");
         });
+
     </script>
 
 
