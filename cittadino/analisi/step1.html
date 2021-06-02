@@ -30,23 +30,49 @@
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d749.3116932544889!2d14.99643572189979!3d40.34678477923355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bfe356cd9e313%3A0x452ca822be277d6e!2sVia%20Madonna%20del%20Carmine%2C%20230%2C%2084043%20Agropoli%20SA!5e1!3m2!1sit!2sit!4v1622578395518!5m2!1sit!2sit"
             style="border:0;" allowfullscreen="" loading="lazy" height="300"></iframe>
 
+        <div class="mt-30"></div>
+        <p id="error-description" class="error-text" style="display:none">
+            *Aggiungi delle note sul perchè stai effettuando questa analisi ed eventuali segni particolari
+        </p>
+        <textarea class="emergency-description" placeholder="Aggiungi delle note..." id="description"></textarea>
 
-        <textarea class="emergency-description mt-30" placeholder="Aggiungi delle note..."></textarea>
-
-
-        <a href="./step2.html">
-            <div class="bottom-fixed m10 mb-30">
-                <button class="full-width-primary-button">
-                    <div>
-                        Continua
-                    </div>
-                </button>
-            </div>
-        </a>
+        <div style="margin-bottom:300px"></div>
 
 
+        <div class="bottom-fixed m10 mb-30">
+            <button class="full-width-primary-button" id="send">
+                <div>
+                    Continua
+                </div>
+            </button>
+        </div>
     </div>
 
+
+    <script>
+
+        const saveTemp = obj => {
+            localStorage.setItem("tempAnalysis", JSON.stringify(obj))
+            console.log("Temp analysis updated => ", localStorage.getItem("tempAnalysis"))
+        }
+
+        $("#send").click(() => {
+            const description = $("#description").val().trim();
+
+            if (!description) {
+                $("#error-description").css("display", "flex");
+                return
+            } else {
+                $("#error-description").css("display", "none");
+            }
+
+            const obj = { description }
+            saveTemp(obj)
+
+            window.location.href = "step2.html";
+        });
+
+    </script>
 
 </body>
 

@@ -30,6 +30,9 @@
             </p>
             <textarea class="emergency-description" placeholder="Descrizione dell'emergenza..."
                 id="description"></textarea>
+            <p class="error-text" style="display:none" id="error-description">
+                *La descrizione della segnalazione è obbligatoria
+            </p>
         </div>
 
 
@@ -58,21 +61,19 @@
                 <span class="checkmark"></span>
             </label>
 
-            <a href="tel: +39 31234567890">
-                <div class="mt-30">
+            <div class="mt-30">
 
-                    <button class="outlined-button row">
+                <button class="outlined-button row">
 
-                        <label for="file-upload" class="custom-file-upload">
-                            <i class="fas fa-camera medium-icon" style="margin-right:10px"></i>
-                            <span>AGGIUNGI FOTO</span>
-                        </label>
-                        <input id="file-upload" type="file" style="width:0px" />
+                    <label for="file-upload" class="custom-file-upload">
+                        <i class="fas fa-camera medium-icon" style="margin-right:10px"></i>
+                        <span>AGGIUNGI FOTO</span>
+                    </label>
+                    <input id="file-upload" type="file" style="width:0px" />
 
-                    </button>
+                </button>
 
-                </div>
-            </a>
+            </div>
         </div>
 
 
@@ -120,18 +121,38 @@
         }
 
         $("#send").click(() => {
-            const description = $("#description").val();
+            const description = $("#description").val().trim();
+
+            if (!description) {
+                $("#error-description").css("display", "flex");
+                return
+            } else {
+                $("#error-description").css("display", "none");
+            }
+
             const radioValue = $("input[name='emergency']:checked").val();
             const kit = $("input[name='sendKit']:checked").val();
+            const photo = $('input[type=file]').val().split('\\').pop();
+
 
             const obj = {
                 description,
                 emergencyType: radioValue,
                 sendKit: !!kit
             }
+            if (photo) {
+                obj.photo = "https://www.mycloud.qualcosa/riveguard/uploads/userxxxx/" + photo
+            }
             saveReport(obj)
 
             $("#modal").css("display", "flex");
+        });
+
+
+
+        $(document).on("input", "input:file", function (e) {
+            let fileName = e.target.files[0].name;
+            $(this).after(fileName);
         });
 
     </script>

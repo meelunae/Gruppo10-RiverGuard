@@ -367,3 +367,7 @@ label{
     color: gray;
     font-size: 12px;
 }
+
+.error-text{
+    color:red;
+}
