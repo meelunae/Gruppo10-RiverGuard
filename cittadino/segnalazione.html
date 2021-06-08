@@ -56,6 +56,16 @@
 
             </div>
 
+            <p style="font-size: small; color:gray;">
+                Legenda:
+                <br />
+                <span><b>Basso:</b>&nbsp;Leggero odore sulfureo, acqua torbida</span>
+                <br />
+                <span><b>Medio:</b>&nbsp;Odore fastidioso, acqua colore marroncino</span>
+                <br />
+                <span><b>Alto:</b>&nbsp;Cadavere che galleggia in superficie</span>
+            </p>
+
             <label class="container-input mt-30">Voglio raccogliere un campione
                 <input type="checkbox" checked="checked" name="sendKit">
                 <span class="checkmark"></span>
@@ -112,6 +122,7 @@
     </div>
 
     <script>
+        //TODO: Aggiungere scala di riferimento per poter aiutare l'utente bla bla bla
 
         const saveReport = obj => {
             const reports = JSON.parse(localStorage.getItem("reports")) || []
@@ -138,7 +149,8 @@
             const obj = {
                 description,
                 emergencyType: radioValue,
-                sendKit: !!kit
+                sendKit: !!kit,
+                createdAt: new Date()
             }
             if (photo) {
                 obj.photo = "https://www.mycloud.qualcosa/riveguard/uploads/userxxxx/" + photo

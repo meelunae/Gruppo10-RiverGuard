@@ -6,7 +6,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Jrp9PtHe0WapppUzxbIpMDWMAcV3qE4"></script>
+    <script src="https://unpkg.com/location-picker/dist/location-picker.min.js"></script>
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 250px;
+        }
+    </style>
 </head>
 
 <body class="bg-secondary container">
@@ -25,10 +33,12 @@
         <h1>Step 1 - Geolocalizzazione</h1>
 
         <p class="small-text-description">Trascina il punto sulla mappa dove riceverai il campione</p>
-
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d749.3116932544889!2d14.99643572189979!3d40.34678477923355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bfe356cd9e313%3A0x452ca822be277d6e!2sVia%20Madonna%20del%20Carmine%2C%20230%2C%2084043%20Agropoli%20SA!5e1!3m2!1sit!2sit!4v1622578395518!5m2!1sit!2sit"
-            style="border:0;" allowfullscreen="" loading="lazy" height="300"></iframe>
+        <div id="map"></div>
+        <!-- <br>
+        <button id="confirmPosition">Confirm Position</button>
+        <br>
+        <p>On idle position: <span id="onIdlePositionView"></span></p>
+        <p>On click position: <span id="onClickPositionView"></span></p> -->
 
         <div class="mt-30"></div>
         <p id="error-description" class="error-text" style="display:none">
@@ -51,12 +61,26 @@
 
     <script>
 
+        //TODO: Fai lista delle analisi (schermata)
+        //TODO: Fai lista delle segnalazioni (schermata)
+
+        var map = document.getElementById('map');
+        // Initialize LocationPicker plugin
+        var lp = new locationPicker(map, {
+            setCurrentPosition: true, // You can omit this, defaults to true
+            lat: 40.68889807412777,
+            lng: 14.773438262651947
+        }, {
+            zoom: 15 // You can set any google map options here, zoom defaults to 15
+        });
+
         const saveTemp = obj => {
             localStorage.setItem("tempAnalysis", JSON.stringify(obj))
             console.log("Temp analysis updated => ", localStorage.getItem("tempAnalysis"))
         }
 
         $("#send").click(() => {
+            var location = lp.getMarkerPosition();
             const description = $("#description").val().trim();
 
             if (!description) {
@@ -66,11 +90,22 @@
                 $("#error-description").css("display", "none");
             }
 
-            const obj = { description }
+            const obj = {
+                description,
+                location,
+                createdAt: new Date()
+            }
             saveTemp(obj)
 
             window.location.href = "step2.html";
         });
+
+    </script>
+
+    <script>
+
+
+
 
     </script>
 

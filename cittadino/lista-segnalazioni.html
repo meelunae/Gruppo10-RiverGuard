@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body class="bg-secondary container">
+
+    <div class="align-items-center">
+        <h1 class="primary-text-color">Lista segnalazioni</h1>
+        <div id="list">
+
+        </div>
+    </div>
+
+    <footer class="bottom-fixed bg-primary">
+        <div class="row justify-content m-20">
+            <a href="./home.html">
+                <i class="fas fa-home medium-icon icon-navbar"></i>
+            </a>
+            <a href="./lista-analisi.html">
+                <i class="fas fa-vial medium-icon icon-navbar"></i>
+            </a>
+
+            <a href="./lista-segnalazioni.html">
+                <i class="fas fa-receipt medium-icon icon-selected"></i>
+            </a>
+            <i class="fas fa-user medium-icon icon-navbar"></i>
+
+        </div>
+    </footer>
+
+    <script>
+
+        $(document).ready(function () {
+            const items = JSON.parse(localStorage.getItem("reports"))
+            console.log(items)
+
+            const container = $("#list");
+            items.map(item => {
+                const ca = new Date(item.createdAt)
+                const text = item.description.length < 100 ? item.description : item.description.substring(0, 97) + "..."
+                const date = ca.getFullYear() + "-" + (ca.getMonth() + 1) + "-" + ca.getDay() + " " + ca.getHours() + ":" + ca.getMinutes()
+                var div = $('<div></div>').addClass('segnalazione-item')
+                var dateP = $('<p></p>').text(date)
+                var descriptionP = $('<p></p>').text(text)
+                var emergenzaP = $('<p></p>').text("Grado emergenza: " + item.emergencyType)
+                var kitP = $('<p></p>').text("Richiesta kit: " + item.sendKit)
+
+                div.append(dateP)
+                div.append(descriptionP)
+                div.append(emergenzaP)
+                div.append(kitP)
+
+                container.append(div);
+            })
+        });
+
+    </script>
+
+</body>
+
+
+
+</html>
