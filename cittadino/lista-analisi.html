@@ -13,9 +13,11 @@
 
     <div class="align-items-center">
         <h1 class="primary-text-color">Lista analisi</h1>
-
-
     </div>
+    <span class="disabled">Quì puoi vedere le date e le note delle analisi effettaute</span>
+
+    <div id="list"> </div>
+
 
     <footer class="bottom-fixed bg-primary">
         <div class="row justify-content m-20">
@@ -29,10 +31,36 @@
             <a href="./lista-segnalazioni.html">
                 <i class="fas fa-receipt medium-icon icon-navbar"></i>
             </a>
-            <i class="fas fa-user medium-icon icon-navbar"></i>
+            <!-- <i class="fas fa-user medium-icon icon-navbar"></i> -->
 
         </div>
     </footer>
+
+
+    <script>
+
+        $(document).ready(function () {
+            const items = JSON.parse(localStorage.getItem("analysis"))
+            console.log(items)
+
+            const container = $("#list");
+            items.map(item => {
+                const ca = new Date(item.createdAt)
+                const text = item.description.length < 100 ? item.description : item.description.substring(0, 97) + "..."
+                const date = ca.getFullYear() + "-" + (ca.getMonth() + 1) + "-" + ca.getDay() + " " + ca.getHours() + ":" + ca.getMinutes()
+                var div = $('<div></div>').addClass('segnalazione-item')
+                var dateP = $('<p></p>').text("Data: " + date)
+                var descriptionP = $('<p></p>').text(text)
+              
+                div.append(dateP)
+                div.append(descriptionP)
+             
+                container.append(div);
+            })
+        });
+
+    </script>
+
 
 </body>
 
