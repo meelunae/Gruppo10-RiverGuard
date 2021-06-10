@@ -1,0 +1,214 @@
+<html>
+   <head>
+      <link rel="stylesheet" href="../assets/css/styles.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <title>RiverGuard - Segnalazioni</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   </head>
+   <body>
+      <header>
+         <div class="nav">
+         <div class="nav">
+            <div class="nav-links">
+               <a href="#">RIVERGUARD</a>
+               <a href="segnalazioni.html"> SEGNALAZIONI</a>
+               <a href="richieste.html">RICHIESTE KIT</a>
+               <a href="home.html">ANALISI CAMPIONI</a>
+            </div>
+            <div class="nav-header">
+               <div class="nav-images">
+                  <span id="search" class="fas fa-search menuitem"></span> 
+                  <span id="notifs" class="fas fa-bell menuitem"></span> 
+                  <span id="userImg" class="fas fa-user menuitem"></span> 
+               </div>
+            </div>
+         </div>
+      </header>
+      <div class="container row">
+         <div class="data-section">
+            <h1>Segnalazioni</h1>
+            <section>
+               <div style="float:left;margin-right:20px;">
+                  <label for="start">From date:</label>
+                  <input type="date" id="start" name="research-start"
+                     value="2021-05-01"
+                     min="2021-05-01" max="2021-06-01">
+               </div>
+               <div style="float:left;">
+                  <label for="start">To date:</label>
+                  <input type="date" id="end" name="research-end"
+                     value="2021-06-01"
+                     min="2021-05-01" max="2021-06-01">
+               </div>
+               <br style="clear:both;" />
+            </section>
+            <table class="data-table" id="data">
+               <thead>
+                  <tr>
+                     <th>Segnalazione effettuata da</th>
+                     <th>Giorno e ora</th>
+                     <th>Grado di allarme</th>
+                  </tr>
+               <tbody>
+               </tbody>
+               </thead>
+            </table>
+         </div>
+         <div class="data-section" id="details">
+            <h1>Segnalazione #<span id="reportNumberText"></span> del <span id="reportDateText"></span></h1>
+            <div class="details-section">
+               <div class="subcolumn-section">
+                  <h3>Grado di allarme: <span id="grado-allarme"></span></h3>
+                  <textarea rows="20" cols="30" readonly>Descrizione dell'emergenza inserita dal cittadino</textarea>
+               </div>
+               <div class="subcolumn-section">
+                  <h3>Info cittadino</h3>
+                  <div class="contactCard">
+                     <i class="fas fa-user-circle contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactName"></span>
+                     </div>
+                  </div>
+                  <div class="contactCard">
+                     <i class="fas fa-phone icon contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactPhone"></span><br>
+                        <span class="subtext">Telefono</span>
+                     </div>
+                  </div>
+                  <div class="contactCard">
+                     <i class="fas fa-envelope icon contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactEmail"></span><br>
+                        <span class="subtext">Email</span>
+                     </div>
+                  </div>
+                  <div class="contactCard">
+                     <i class="fas fa-map-marker-alt contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactAddress"></span><br>
+                        <span class="subtext">Indirizzo residenza</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal" id="modal" style="display: none;">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+               <div class="modal-body align-items-center">
+                  <i class="fas fa-exclamation-circle big-icon"></i>
+                  <h3 class="primary-text-color" style="margin-bottom: 5px;">
+                     Siamo spiacenti!
+                  </h3>
+                  <span class="primary-text-color">
+                  Questa funzione non e' al momento disponibile :(
+                  </span>
+                  <a href="#">
+                     <div class="m10">
+                        <button id="closeModal" class="full-width-primary-button primary-size asd">vai alla home</button>
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         <div class="foot">
+            <div class="nav-header">
+               <div class="nav-images">
+                  <span id="ig" class="fab fa-instagram"></span> 
+                  <span id="twt" class="fab fa-twitter menuitem"></span> 
+                  <span id="fb" class="fab fa-facebook-f menuitem"></span> 
+               </div>
+            </div>
+         </div>
+      </footer>
+      <script>
+         $(document).ready(function() {
+         
+         var table = document.getElementById("data");
+         
+         var mydata;
+         
+         fetch("segnalazioniMock.json")
+         .then(res => res.json())
+         .then(data => mydata = data)
+         .then(() => { for(i = 0; i < mydata.length; i++) {
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            var cell7 = row.insertCell(6);
+            var cell8 = row.insertCell(7);
+            cell5.style.visibility = "hidden";
+            cell6.style.visibility = "hidden";
+            cell7.style.visibility = "hidden";
+            cell8.style.visibility = "hidden";
+            cell1.id = "reportName";
+            cell2.id = "reportDate";
+            cell3.id = "reportSeverity";
+            cell5.id = "reportPhone";
+            cell6.id = "reportEmail";
+            cell7.id = "reportID";
+            cell8.id = "reportHome";
+            cell1.innerHTML = mydata[i].name;
+            cell2.innerHTML = mydata[i].date;
+            cell3.innerHTML = mydata[i].severity;
+            cell4.innerHTML = '<button class="desktop-primary-button detailsButton">Dettagli</button>';
+            cell5.innerHTML = mydata[i].contactPhone;
+            cell6.innerHTML = mydata[i].contactEmail;
+            cell7.innerHTML = mydata[i].reportID;
+            cell8.innerHTML = mydata[i].homeAddress;
+         }
+         
+         $('.detailsButton').click(function() {
+         
+            $("input[type=radio]").attr("disabled", "disabled");
+            $("#details").css("display", "block");
+            var $row = $(this).parents("tr");
+            $('#reportDateText').text($row.find("#reportDate").text());
+            switch($row.find('#reportSeverity').text()) {
+                case "Basso":
+                    $('#grado-allarme').css("color", "green");
+                    $('#grado-allarme').text("Basso");
+                    break;
+                case "Medio":
+                    $('#grado-allarme').css("color", "orange");
+                    $('#grado-allarme').text("Medio");
+                    break;
+                case "Alto":
+                    $('#grado-allarme').css("color", "red");
+                    $('#grado-allarme').text("Alto");
+                    break;
+            }
+            $('#reportNumberText').text($row.find("#reportID").text());
+            $('#contactName').text($row.find("#reportName").text());
+            $('#contactPhone').text($row.find("#reportPhone").text());
+            $('#contactEmail').text($row.find("#reportEmail").text());
+            $('#contactAddress').text($row.find("#reportHome").text());
+         });
+         
+         $("#userImg").click(() => {
+            $("#modal").css("display", "flex");
+         });
+         
+         $("#search").click(() => {
+            $("#modal").css("display", "flex");
+         });
+         $("#notifs").click(() => {
+            $("#modal").css("display", "flex");
+         });
+         $("#closeModal").click(()=> {
+            $("#modal").css("display", "none");
+         });
+         })
+         });
+      </script>
+   </body>
+</html>

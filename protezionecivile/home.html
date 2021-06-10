@@ -1,0 +1,456 @@
+<html>
+   <head>
+      <link rel="stylesheet" href="../assets/css/styles.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <title>RiverGuard - Analisi Campioni</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+   </head>
+   <body>
+      <header>
+         <div class="nav">
+            <div class="nav-links">
+               <a href="#">RIVERGUARD</a>
+               <a href="segnalazioni.html"> SEGNALAZIONI</a>
+               <a href="richieste.html">RICHIESTE KIT</a>
+               <a href="home.html">ANALISI CAMPIONI</a>
+            </div>
+            <div class="nav-header">
+               <div class="nav-images">
+                  <span id="search" class="fas fa-search menuitem"></span> 
+                  <span id="notifs" class="fas fa-bell menuitem"></span> 
+                  <span id="userImg" class="fas fa-user menuitem"></span> 
+               </div>
+            </div>
+         </div>
+      </header>
+      <div class="container row">
+         <div class="data-section">
+            <h1>Dati preliminari analizzati</h1>
+            <section>
+               <div style="float:left;margin-right:20px;">
+                  <label for="start">From date:</label>
+                  <input type="date" id="start" name="research-start"
+                     value="2021-05-01"
+                     min="2021-05-01" max="2021-06-01">
+               </div>
+               <div style="float:left;">
+                  <label for="start">To date:</label>
+                  <input type="date" id="end" name="research-end"
+                     value="2021-06-01"
+                     min="2021-05-01" max="2021-06-01">
+               </div>
+               <br style="clear:both;" />
+            </section>
+            <table class="data-table" id="data">
+               <thead>
+                  <tr>
+                     <th>Rilevazione effettuata da</th>
+                     <th>Giorno e ora</th>
+                     <th>Posizione GPS</th>
+                     <th>Grado di allarme</th>
+                  </tr>
+               <tbody>
+               </tbody>
+               </thead>
+            </table>
+         </div>
+         <div class="data-section" id="details">
+            <h1>Campione #<span id="reportNumberText"></span> del <span id="reportDateText"></span></h1>
+            <div class="details-section">
+               <div class="subcolumn-section">
+                  <h3>Grado di allarme: <span id="grado-allarme" style="color:red;">Alto</span></h3>
+                  <div class="test-strip-line"></div>
+                  <div class="row align-items-center-row  mb-20" id="l1">
+                     <div class="left-color" style="background-color: #EDC130;"></div>
+                     <div class="color-box-warning space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #C4944A;" />
+                           <span>0</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #C1912B;" />
+                           <span>40</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #BCA94D;" />
+                           <span>80</span>
+                        </div>
+                     </div>
+                     <div class="color-box-ok space">
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #6F8C7E;" />
+                           <span>120</span>
+                        </div>
+                     </div>
+                     <div class="color-box-error">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #4B8D7F;" />
+                           <span>180</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #1A598F;" />
+                           <span>240</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r1" style="background-color: #163474;" />
+                           <span>400</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center-row mb-20" id="l2">
+                     <div class="left-color" style="background-color: #EED728;"></div>
+                     <div class="color-box space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r2" style="background-color: #F8EB00;" />
+                           <span>6.2</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r2" style="background-color: #F8D204;" />
+                           <span>6.8</span>
+                        </div>
+                     </div>
+                     <div class="color-box-ok space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r2" style="background-color: #F89F03;" />
+                           <span>7.2</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r2" style="background-color: #FA6801;" />
+                           <span>7.6</span>
+                        </div>
+                     </div>
+                     <div class="color-box">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r2" style="background-color: #E84114;" />
+                           <span>7.8</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r2" style="background-color: #CA5158;" />
+                           <span>8.4</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center-row mb-20" id="l3">
+                     <div class="left-color" style="background-color: #8D8208;"></div>
+                     <div class="color-box-warning space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r3" style="background-color: #578642;" />
+                           <span>0</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r3" style="background-color: #3D6A2D;" />
+                           <span>25</span>
+                        </div>
+                     </div>
+                     <div class="color-box-ok space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r3" style="background-color: #4F6B1E;" />
+                           <span>50</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r3" style="background-color: #696507;" />
+                           <span>125</span>
+                        </div>
+                     </div>
+                     <div class="color-box-error">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r3" style="background-color: #6F500B;" />
+                           <span>250</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r3" style="background-color: #6C3B02;" />
+                           <span>425</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center-row mb-20" id="l4">
+                     <div class="left-color" style="background-color: #DFA245;"></div>
+                     <div class="color-box-ok space">
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r4" style="background-color: #FAC859;" />
+                           <span>0</span>
+                        </div>
+                     </div>
+                     <div class="color-box-error space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r4" style="background-color: #EAB541;" />
+                           <span>20</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r4" style="background-color: #E5A55D;" />
+                           <span>50</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r4" style="background-color: #EB7C2A;" />
+                           <span>100</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r4" style="background-color: #D56980;" />
+                           <span>200</span>
+                        </div>
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r4" style="background-color: #BA226B;" />
+                           <span>500</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center-row mb-20" id="l5">
+                     <div class="left-color" style="background-color: #E8E9E4;"></div>
+                     <div class="color-box-ok space">
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #FFFFFF;" />
+                           <span>0</span>
+                        </div>
+                     </div>
+                     <div class="color-box-error space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #F1E9DC;" />
+                           <span>5</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #F8E1CF;" />
+                           <span>10</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #F3D2AF;" />
+                           <span>25</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #F6C799;" />
+                           <span>50</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #FBA55C;" />
+                           <span>100</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r5" style="background-color: #EA8E3B;" />
+                           <span>250</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center-row mb-20" id="l6">
+                     <div class="left-color" style="background-color: #E8E9E4;"></div>
+                     <div class="color-box-ok space">
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #FDE8F7;" />
+                           <span>0</span>
+                        </div>
+                     </div>
+                     <div class="color-box-error space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #E2D3FE;" />
+                           <span>0.002</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #CABEE2;" />
+                           <span>0.005</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #BBADDD;" />
+                           <span>0.01</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #A277AF;" />
+                           <span>0.02</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #654A7D;" />
+                           <span>0.04</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r6" style="background-color: #593267;" />
+                           <span>0.08</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center-row mb-20" id="l7">
+                     <div class="left-color" style="background-color: #E8E9E4;"></div>
+                     <div class="color-box-ok space">
+                        <div class="check-box">
+                           <input type="radio" class="square-radio" name="r7" style="background-color: #E1D1E0;" />
+                           <span>2</span>
+                        </div>
+                     </div>
+                     <div class="color-box-error space">
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r7" style="background-color: #D8B8DD;" />
+                           <span>5</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r7" style="background-color: #DCA6DA;" />
+                           <span>10</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r7" style="background-color: #C47A9B;" />
+                           <span>30</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r7" style="background-color: #A53F84;" />
+                           <span>50</span>
+                        </div>
+                        <div class="check-box space">
+                           <input type="radio" class="square-radio" name="r7" style="background-color: #761856;" />
+                           <span>100</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="subcolumn-section">
+                  <h3>Info cittadino</h3>
+                  <div class="contactCard">
+                     <i class="fas fa-user-circle contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactName"></span>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="contactCard">
+                     <i class="fas fa-phone icon contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactPhone"></span><br>
+                        <span class="subtext">Telefono</span>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="contactCard">
+                     <i class="fas fa-envelope icon contactMethod"></i>
+                     <div class="contactInfo">
+                        <span id="contactEmail"></span><br>
+                        <span class="subtext">Email</span>
+                     </div>
+                  </div>
+                  <div class="contactCard">
+                    <i class="fas fa-map-marker-alt contactMethod"></i>
+                    <div class="contactInfo">
+                       <span id="contactAddress"></span><br>
+                       <span class="subtext">Indirizzo residenza</span>
+                    </div>
+                 </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal" id="modal" style="display: none;">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+               <div class="modal-body align-items-center">
+                  <i class="fas fa-exclamation-circle big-icon"></i>
+                  <h3 class="primary-text-color" style="margin-bottom: 5px;">
+                     Siamo spiacenti!
+                  </h3>
+                  <span class="primary-text-color">
+                  Questa funzione non e' al momento disponibile :(
+                  </span>
+                  <a href="#">
+                     <div class="m10">
+                        <button id="closeModal" class="full-width-primary-button primary-size asd">chiudi</button>
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         <div class="foot">
+            <div class="nav-header">
+               <div class="nav-images">
+                  <span id="ig" class="fab fa-instagram"></span> 
+                  <span id="twt" class="fab fa-twitter menuitem"></span> 
+                  <span id="fb" class="fab fa-facebook-f menuitem"></span> 
+               </div>
+            </div>
+         </div>
+      </footer>
+      <script>
+         $(document).ready(function() {
+         
+             var table = document.getElementById("data");
+         
+             var mydata;
+         
+             fetch("campioniMock.json")
+             .then(res => res.json())
+             .then(data => mydata = data)
+             .then(() => { for(i = 0; i < mydata.length; i++) {
+                 var rowCount = table.rows.length;
+                 var row = table.insertRow(rowCount);
+                 var cell1 = row.insertCell(0);
+                 var cell2 = row.insertCell(1);
+                 var cell3 = row.insertCell(2);
+                 var cell4 = row.insertCell(3);
+                 var cell5 = row.insertCell(4);
+                 var cell6 = row.insertCell(5);
+                 var cell7 = row.insertCell(6);
+                 var cell8 = row.insertCell(7);
+                 var cell9 = row.insertCell(8);
+                 cell6.style.visibility = "hidden";
+                 cell7.style.visibility = "hidden";
+                 cell8.style.visibility = "hidden";
+                 cell9.style.visibility = "hidden";
+                 cell1.id = "reportName";
+                 cell2.id = "reportDate";
+                 cell3.id = "reportPlace";
+                 cell4.id = "reportSeverity";
+                 cell6.id = "reportPhone";
+                 cell7.id = "reportEmail";
+                 cell8.id = "reportID";
+                 cell9.id = "reportHome";
+                 cell1.innerHTML = mydata[i].name;
+                 cell2.innerHTML = mydata[i].date;
+                 cell3.innerHTML = mydata[i].place;
+                 cell4.innerHTML = mydata[i].severity;
+                 cell5.innerHTML = '<button class="desktop-primary-button detailsButton">Dettagli</button>';
+                 cell6.innerHTML = mydata[i].contactPhone;
+                 cell7.innerHTML = mydata[i].contactEmail;
+                 cell8.innerHTML = mydata[i].reportID;
+                 cell9.innerHTML = mydata[i].reportHome;
+             }
+             
+         $('.detailsButton').click(function() {
+         
+                 $("input[type=radio]").attr("disabled", "disabled");
+                 $("#details").css("display", "block");
+                 var $row = $(this).parents("tr");
+                 $('#reportDateText').text($row.find("#reportDate").text());
+                 switch($row.find('#reportSeverity').text()) {
+                     case "Basso":
+                         $('#grado-allarme').css("color", "green");
+                         $('#grado-allarme').text("Basso");
+                         break;
+                     case "Medio":
+                         $('#grado-allarme').css("color", "orange");
+                         $('#grado-allarme').text("Medio");
+                         break;
+                     case "Alto":
+                         $('#grado-allarme').css("color", "red");
+                         $('#grado-allarme').text("Alto");
+                         break;
+                 }
+                 $('#reportNumberText').text($row.find("#reportID").text());
+                 $('#contactName').text($row.find("#reportName").text());
+                 $('#contactPhone').text($row.find("#reportPhone").text());
+                 $('#contactEmail').text($row.find("#reportEmail").text());
+                 $('#contactAddress').text($row.find("#reportHome").text());
+
+            });
+         
+             $("#userImg").click(() => {
+                 $("#modal").css("display", "flex");
+             });
+         
+             $("#search").click(() => {
+                 $("#modal").css("display", "flex");
+             });
+             $("#notifs").click(() => {
+                 $("#modal").css("display", "flex");
+             });
+             $("#closeModal").click(()=> {
+                 $("#modal").css("display", "none");
+             })
+             })
+         });
+      </script>
+   </body>
+</html>

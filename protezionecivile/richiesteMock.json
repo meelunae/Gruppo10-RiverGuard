@@ -1,0 +1,7 @@
+[
+    {"requestID" : 1, "name" : "Giovanni De Luca", "date" : "08/06/2021 12:39", "homeAddress" : "Angri (SA), Via Marco Polo 19", "severity" : "Medio", "contactPhone" : "+39 3312345678", "contactEmail" : "giovannideluca@gmail.com", "status" : "Richiesta rifiutata"},
+    {"requestID" : 2, "name" : "Hermann Senatore", "date" : "05/06/2021 9:41", "homeAddress" : "Nocera Inferiore (SA), Via Basso 19", "severity" : "Alto", "contactPhone" : "+39 3331234567", "contactEmail" : "h.senatore@gmail.com", "status" : "Kit richiesto"},
+    {"requestID" : 3, "name" : "Alfonso De Maio", "date" : "09/06/2021 13:30", "homeAddress": "Pagani (SA), Via Trieste 40", "severity" : "Medio", "contactPhone" : "+39 3331234567", "contactEmail" : "alfonsodemaio@gmail.com", "status" : "Kit richiesto"},
+    {"requestID" : 4, "name" : "Miriam Martone", "date" : "31/05/2021 12:00", "homeAddress" : "Sarno (SA), Via Roma 15", "severity" : "Basso", "contactPhone" : "+39 3341234567", "contactEmail" : "miriammartone@gmail.com", "status" : "Kit consegnato"}
+
+]
