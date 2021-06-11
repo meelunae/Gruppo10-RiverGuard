@@ -63,7 +63,7 @@
                   <textarea rows="20" cols="30" readonly>Descrizione dell'emergenza inserita dal cittadino</textarea>
                   <h3>Stato richiesta: <span id="requestStatus"></span></h3>
                   <button id="acceptRequest" class="desktop-primary-button">Accetta richiesta</button>
-                  <button class="outlined-button">Rifiuta</button>
+                  <button id="denyRequest" class="outlined-button">Rifiuta</button>
                </div>
                <div class="subcolumn-section">
                   <h3>Info cittadino</h3>
@@ -167,6 +167,25 @@
                </div>
             </div>
          </div>
+         <div class="modal" id="deniedModal" style="display: none;">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+               <div class="modal-body align-items-center">
+                  <i class="fas fa-sad-tear big-icon"></i>
+                  <h3 class="primary-text-color" style="margin-bottom: 5px;">
+                     Hai rifiutato la richiesta.
+                  </h3>
+                  <span class="primary-text-color">
+                  Torna alla home per continuare.
+                  </span>
+                  <a href="home.html">
+                     <div class="m10">
+                        <button id="closeModal" class="full-width-primary-button primary-size asd">vai alla home</button>
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>   
       </div>
       <footer>
          <div class="foot">
@@ -260,20 +279,34 @@
          });
          
          $('#acceptRequest').click(function () {
-            $("#modalRequest").css("display", "flex");
-            $('#nameKitRecipient').text($("#contactName").text());
-            $('#contactNameModal').text($("#contactName").text());
-            $('#contactPhoneModal').text($("#contactPhone").text());
-            $('#contactEmailModal').text($("#contactEmail").text());
-            $('#contactAddressModal').text($("#contactAddress").text());
-
+            if($("#requestStatus").text() == "Kit richiesto") {
+               $("#modalRequest").css("display", "flex");
+               $('#nameKitRecipient').text($("#contactName").text());
+               $('#contactNameModal').text($("#contactName").text());
+               $('#contactPhoneModal').text($("#contactPhone").text());
+               $('#contactEmailModal').text($("#contactEmail").text());
+               $('#contactAddressModal').text($("#contactAddress").text());
+            }
          });
-         
+
          $('#acceptButton').click(function() {
 
             richieste.forEach(function(entry) {
                if(entry.status == "Kit richiesto" && entry.requestID == $("#reportNumberText").text()) {
                   entry.status = "Richiesta accettata";
+               }
+            });
+            localStorage.setItem("richieste", JSON.stringify(richieste));
+            });
+
+
+         
+         $('#denyRequest').click(function() {
+
+            richieste.forEach(function(entry) {
+               if(entry.status == "Kit richiesto" && entry.requestID == $("#reportNumberText").text()) {
+                  entry.status = "Richiesta rifiutata";
+                  $('#deniedModal').css("display", "flex");
                }
             });
             localStorage.setItem("richieste", JSON.stringify(richieste));
