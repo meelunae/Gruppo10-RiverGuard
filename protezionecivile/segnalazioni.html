@@ -135,7 +135,12 @@
          fetch("segnalazioniMock.json")
          .then(res => res.json())
          .then(data => mydata = data)
-         .then(() => { for(i = 0; i < mydata.length; i++) {
+         .then(() => {  
+            if(localStorage.getItem("segnalazioni") == undefined) {
+                  localStorage.setItem("segnalazioni", JSON.stringify(mydata));
+               }
+            var segnalazioni = JSON.parse(localStorage.getItem("segnalazioni"));
+            segnalazioni.forEach(function(entry) {
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
             var cell1 = row.insertCell(0);
@@ -157,15 +162,15 @@
             cell6.id = "reportEmail";
             cell7.id = "reportID";
             cell8.id = "reportHome";
-            cell1.innerHTML = mydata[i].name;
-            cell2.innerHTML = mydata[i].date;
-            cell3.innerHTML = mydata[i].severity;
+            cell1.innerHTML = entry.name;
+            cell2.innerHTML = entry.date;
+            cell3.innerHTML = entry.severity;
             cell4.innerHTML = '<button class="desktop-primary-button detailsButton">Dettagli</button>';
-            cell5.innerHTML = mydata[i].contactPhone;
-            cell6.innerHTML = mydata[i].contactEmail;
-            cell7.innerHTML = mydata[i].reportID;
-            cell8.innerHTML = mydata[i].homeAddress;
-         }
+            cell5.innerHTML = entry.contactPhone;
+            cell6.innerHTML = entry.contactEmail;
+            cell7.innerHTML = entry.reportID;
+            cell8.innerHTML = entry.homeAddress;
+         });
          
          $('.detailsButton').click(function() {
          
